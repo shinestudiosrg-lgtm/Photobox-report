@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Photobox Report Pro</title>  <style>
+  <title>Shine Photobox Report</title>  <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ff4ecd, #3b82f6, #facc15);
@@ -58,7 +58,7 @@
     }
 
     .generate {
-      background: linear-gradient(90deg, #22c55e, #4ade80);
+      background: linear-gradient(90deg, #ff4ecd, #f472b6);
       color: white;
     }
 
@@ -68,8 +68,8 @@
     }
 
     .wa {
-      background: linear-gradient(90deg, #25D366, #4ade80);
-      color: white;
+      background: linear-gradient(90deg, #facc15, #fde047);
+      color: #111;
     }
 
     button:hover {
@@ -84,7 +84,7 @@
       background: #020617;
       color: #4ade80;
       border: none;
-      height: 200px;
+      height: 220px;
       font-size: 13px;
     }
 
@@ -96,18 +96,20 @@
     }
   </style></head>
 <body><div class="container">
-  <h2>📸 Photobox Professional</h2>  <input type="number" id="cash" placeholder="Cash (Rp)" />
+  <h2>✨ Shine Photobox</h2>  <input type="text" id="nama" placeholder="Nama Petugas / Shift" />
+  <input type="number" id="cash" placeholder="Cash (Rp)" />
   <input type="number" id="qris" placeholder="QRIS (Rp)" />
   <input type="number" id="kertas" placeholder="Kertas Terpakai" />
   <input type="number" id="sisa" placeholder="Sisa Kertas" /><button class="generate" onclick="generateReport()">Generate Report</button> <button class="copy" onclick="copyText()">Copy Report</button> <button class="wa" onclick="sendWA()">Kirim ke WhatsApp</button>
 
-  <textarea id="output" readonly placeholder="Hasil laporan akan muncul di sini..."></textarea>  <div class="footer">© Photobox System</div>
+  <textarea id="output" readonly placeholder="Hasil laporan akan muncul di sini..."></textarea>  <div class="footer">© Shine Photobox System</div>
 </div><script>
 function rupiah(n) {
   return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
 function generateReport() {
+  const nama = document.getElementById('nama').value || '-';
   const cash = +document.getElementById('cash').value || 0;
   const qris = +document.getElementById('qris').value || 0;
   const kertas = document.getElementById('kertas').value || 0;
@@ -119,7 +121,7 @@ function generateReport() {
     day: 'numeric', month: 'long', year: 'numeric'
   });
 
-  const text = `📸 REPORT HARIAN PHOTOBOX GACOAN\n\nTanggal : ${tanggal}\n\nCash = ${rupiah(cash)}\nQRIS = ${rupiah(qris)}\n\nKertas terpakai = ${kertas}\nSisa kertas = ${sisa}\n\nTotal pendapatan = ${rupiah(total)}\n\nTerima kasih 🙏`;
+  const text = `✨ SHINE PHOTOBOX - REPORT HARIAN\n\nTanggal : ${tanggal}\nPetugas : ${nama}\n\nCash = ${rupiah(cash)}\nQRIS = ${rupiah(qris)}\n\nKertas terpakai = ${kertas}\nSisa kertas = ${sisa}\n\nTotal pendapatan = ${rupiah(total)}\n\nTerima kasih 🙏`;
 
   document.getElementById('output').value = text;
 }
