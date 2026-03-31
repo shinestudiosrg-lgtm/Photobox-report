@@ -35,7 +35,7 @@
       color: #111827;
     }
 
-    input {
+    input, select {
       width: 100%;
       padding: 12px;
       margin: 8px 0;
@@ -96,8 +96,15 @@
     }
   </style></head>
 <body><div class="container">
-  <h2>✨ Shine Photobox</h2>  <input type="text" id="nama" placeholder="Nama Petugas" />
-  <input type="text" id="shift" placeholder="Shift (Pagi / Siang / Malam)" />
+  <h2>✨ Shine Photobox</h2>  <select id="nama">
+    <option value="">Pilih Petugas</option>
+    <option value="Reny">Reny</option>
+    <option value="Gita">Gita</option>
+  </select>  <select id="shift">
+    <option value="">Pilih Shift</option>
+    <option value="Siang">Siang</option>
+    <option value="Malam">Malam</option>
+  </select>
   <input type="number" id="cash" placeholder="Cash (Rp)" />
   <input type="number" id="qris" placeholder="QRIS (Rp)" />
   <input type="number" id="kertas" placeholder="Kertas Terpakai" />
