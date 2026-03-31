@@ -96,7 +96,8 @@
     }
   </style></head>
 <body><div class="container">
-  <h2>✨ Shine Photobox</h2>  <input type="text" id="nama" placeholder="Nama Petugas / Shift" />
+  <h2>✨ Shine Photobox</h2>  <input type="text" id="nama" placeholder="Nama Petugas" />
+  <input type="text" id="shift" placeholder="Shift (Pagi / Siang / Malam)" />
   <input type="number" id="cash" placeholder="Cash (Rp)" />
   <input type="number" id="qris" placeholder="QRIS (Rp)" />
   <input type="number" id="kertas" placeholder="Kertas Terpakai" />
@@ -110,6 +111,7 @@ function rupiah(n) {
 
 function generateReport() {
   const nama = document.getElementById('nama').value || '-';
+  const shift = document.getElementById('shift').value || '-';
   const cash = +document.getElementById('cash').value || 0;
   const qris = +document.getElementById('qris').value || 0;
   const kertas = document.getElementById('kertas').value || 0;
@@ -121,7 +123,8 @@ function generateReport() {
     day: 'numeric', month: 'long', year: 'numeric'
   });
 
-  const text = `✨ SHINE PHOTOBOX - REPORT HARIAN\n\nTanggal : ${tanggal}\nPetugas : ${nama}\n\nCash = ${rupiah(cash)}\nQRIS = ${rupiah(qris)}\n\nKertas terpakai = ${kertas}\nSisa kertas = ${sisa}\n\nTotal pendapatan = ${rupiah(total)}\n\nTerima kasih 🙏`;
+  const text = `✨ SHINE PHOTOBOX - REPORT HARIAN\n\nTanggal : ${tanggal}\nPetugas : ${nama}
+Shift : ${shift}\n\nCash = ${rupiah(cash)}\nQRIS = ${rupiah(qris)}\n\nKertas terpakai = ${kertas}\nSisa kertas = ${sisa}\n\nTotal pendapatan = ${rupiah(total)}\n\nTerima kasih 🙏`;
 
   document.getElementById('output').value = text;
 }
