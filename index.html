@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photobox Pro Report</title>  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #e2e8f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 12px;
+      border: none;
+      background: #1e293b;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .generate { background: #22c55e; }
+    .copy { background: #3b82f6; }
+    .wa { background: #25D366; }
+    .save { background: #f59e0b; }
+
+    textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 12px;
+      background: #020617;
+      color: #22c55e;
+      border: none;
+      height: 200px;
+    }
+
+    .summary {
+      margin-top: 15px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style></head>
+<body><div class="container">
+  <h2>📸 Photobox Pro</h2>  <input type="number" id="cash" placeholder="Cash" />
+  <input type="number" id="qris" placeholder="QRIS" />
+  <input type="number" id="kertas" placeholder="Kertas Terpakai" />
+  <input type="number" id="sisa" placeholder="Sisa Kertas" /><button class="generate" onclick="generateReport()">Generate Report</button> <button class="copy" onclick="copyText()">Copy</button> <button class="wa" onclick="sendWA()">Kirim WhatsApp</button> <button class="save" onclick="saveData()">Simpan History</button>
+
+  <textarea id="output" readonly></textarea>  <div class="summary" id="summary"></div>
+</div><script>
+function rupiah(n) {
+  return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function generateReport() {
+  const cash = +document.getElementById('cash').value || 0;
+  const qris = +document.getElementById('qris').value || 0;
+  const kertas = document.getElementById('kertas').value || 0;
+  const sisa = document.getElementById('sisa').value || 0;
+
+  const total = cash + qris;
+
+  const tanggal = new Date().toLocaleDateString('id-ID', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  const text = `📸 REPORT HARIAN PHOTOBOX GACOAN\n\nTanggal : ${tanggal}\n\nCash = ${rupiah(cash)}\nQRIS = ${rupiah(qris)}\n\nKertas terpakai = ${kertas}\nSisa kertas = ${sisa}\n\nTotal pendapatan = ${rupiah(total)}\n\nTerima kasih 🙏`;
+
+  document.getElementById('output').value = text;
+
+  document.getElementById('summary').innerText = `Total Hari Ini: ${rupiah(total)}`;
+}
+
+function copyText() {
+  const t = document.getElementById('output');
+  t.select();
+  document.execCommand('copy');
+  alert('Copied!');
+}
+
+function sendWA() {
+  const text = encodeURIComponent(document.getElementById('output').value);
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+function saveData() {
+  const data = {
+    date: new Date().toISOString(),
+    report: document.getElementById('output').value
+  };
+
+  let history = JSON.parse(localStorage.getItem('photobox')) || [];
+  history.push(data);
+
+  localStorage.setItem('photobox', JSON.stringify(history));
+
+  alert('Tersimpan!');
+}
+</script></body>
+</html>
