@@ -2,150 +2,704 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shine Photobox Report</title>  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff4ecd, #3b82f6, #facc15);
-      background-size: 300% 300%;
-      animation: gradientMove 10s ease infinite;
-      color: #0f172a;
-      margin: 0;
-      padding: 20px;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      max-width: 420px;
-      margin: auto;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(12px);
-      padding: 25px;
-      border-radius: 24px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #111827;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 14px;
-      border: none;
-      background: #f1f5f9;
-      font-size: 14px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.3s;
-    }
-
-    .generate {
-      background: linear-gradient(90deg, #ff4ecd, #f472b6);
-      color: white;
-    }
-
-    .copy {
-      background: linear-gradient(90deg, #3b82f6, #60a5fa);
-      color: white;
-    }
-
-    .wa {
-      background: linear-gradient(90deg, #facc15, #fde047);
-      color: #111;
-    }
-
-    button:hover {
-      transform: scale(1.02);
-    }
-
-    textarea {
-      width: 100%;
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 14px;
-      background: #020617;
-      color: #4ade80;
-      border: none;
-      height: 220px;
-      font-size: 13px;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 12px;
-      color: #64748b;
-    }
-  </style></head>
-<body><div class="container">
-  <h2>✨ Shine Photobox</h2>  <select id="nama">
-    <option value="">Pilih Petugas</option>
-    <option value="Reny">Reny</option>
-    <option value="Gita">Gita</option>
-  </select>  <select id="shift">
-    <option value="">Pilih Shift</option>
-    <option value="Siang">Siang</option>
-    <option value="Malam">Malam</option>
-  </select>
-  <input type="number" id="cash" placeholder="Cash (Rp)" />
-  <input type="number" id="qris" placeholder="QRIS (Rp)" />
-  <input type="number" id="kertas" placeholder="Kertas Terpakai" />
-  <input type="number" id="sisa" placeholder="Sisa Kertas" /><button class="generate" onclick="generateReport()">Generate Report</button> <button class="copy" onclick="copyText()">Copy Report</button> <button class="wa" onclick="sendWA()">Kirim ke WhatsApp</button>
-
-  <textarea id="output" readonly placeholder="Hasil laporan akan muncul di sini..."></textarea>  <div class="footer">© Shine Photobox System</div>
-</div><script>
-function rupiah(n) {
-  return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  <title>Shine Photobox Report Premium</title>
+  <style>
+    :root {
+      --bg-1: #0f172a;
+      --bg-2: #1e293b;
+      --card: rgba(255, 255, 255, 0.14);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --dark: #0b1120;
+      --pink: #ff4ecd;
+      --blue: #3b82f6;
+      --yellow: #facc15;
+      --green: #22c55e;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }* {
+  box-sizing: border-box;
 }
 
-function generateReport() {
-  const nama = document.getElementById('nama').value || '-';
-  const shift = document.getElementById('shift').value || '-';
-  const cash = +document.getElementById('cash').value || 0;
-  const qris = +document.getElementById('qris').value || 0;
-  const kertas = document.getElementById('kertas').value || 0;
-  const sisa = document.getElementById('sisa').value || 0;
-
-  const total = cash + qris;
-
-  const tanggal = new Date().toLocaleDateString('id-ID', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  });
-
-  const text = `✨ SHINE PHOTOBOX - REPORT HARIAN\n\nTanggal : ${tanggal}\nPetugas : ${nama}
-Shift : ${shift}\n\nCash = ${rupiah(cash)}\nQRIS = ${rupiah(qris)}\n\nKertas terpakai = ${kertas}\nSisa kertas = ${sisa}\n\nTotal pendapatan = ${rupiah(total)}\n\nTerima kasih 🙏`;
-
-  document.getElementById('output').value = text;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 78, 205, 0.35), transparent 28%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.35), transparent 30%),
+    radial-gradient(circle at bottom center, rgba(250, 204, 21, 0.22), transparent 28%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  padding: 24px;
+  overflow-x: hidden;
 }
 
-function copyText() {
-  const t = document.getElementById('output');
-  t.select();
-  document.execCommand('copy');
-  alert('Report berhasil dicopy');
+.bg-blur {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
 }
 
-function sendWA() {
-  const text = encodeURIComponent(document.getElementById('output').value);
-  window.open(`https://wa.me/?text=${text}`, '_blank');
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.45;
+  animation: floatBlob 14s ease-in-out infinite;
 }
-</script></body>
+
+.blob.one {
+  width: 220px;
+  height: 220px;
+  background: var(--pink);
+  top: 40px;
+  left: -40px;
+}
+
+.blob.two {
+  width: 260px;
+  height: 260px;
+  background: var(--blue);
+  top: 120px;
+  right: -70px;
+  animation-delay: 2s;
+}
+
+.blob.three {
+  width: 240px;
+  height: 240px;
+  background: var(--yellow);
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 4s;
+}
+
+@keyframes floatBlob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.05); }
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.left-panel {
+  padding: 24px;
+}
+
+.right-panel {
+  padding: 22px;
+  position: sticky;
+  top: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  background: linear-gradient(135deg, var(--pink), var(--blue), var(--yellow));
+  box-shadow: 0 12px 30px rgba(255, 78, 205, 0.25);
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.date-badge {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 13px;
+  color: #fff;
+  text-align: right;
+  min-width: 140px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  border-radius: 20px;
+  padding: 16px;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.stat .label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.stat .value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 13px;
+  color: #e2e8f0;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(248, 250, 252, 0.98);
+  color: #0f172a;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.25s ease;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+input.money {
+  padding-left: 44px;
+}
+
+input:focus,
+select:focus {
+  transform: translateY(-1px);
+  border-color: rgba(59,130,246,0.45);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.14);
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+button {
+  border: none;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.generate {
+  background: linear-gradient(135deg, var(--pink), #ff7bd8);
+  color: white;
+  box-shadow: 0 14px 28px rgba(255, 78, 205, 0.26);
+}
+
+.copy {
+  background: linear-gradient(135deg, var(--blue), #7ab1ff);
+  color: white;
+  box-shadow: 0 14px 28px rgba(59, 130, 246, 0.26);
+}
+
+.wa {
+  background: linear-gradient(135deg, var(--yellow), #fde68a);
+  color: #111827;
+  box-shadow: 0 14px 28px rgba(250, 204, 21, 0.22);
+}
+
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.preview-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(74, 222, 128, 0.14);
+  color: #86efac;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.report-box {
+  border-radius: 22px;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(2,6,23,0.95), rgba(15,23,42,0.96));
+  border: 1px solid rgba(255,255,255,0.08);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.report-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.report-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+}
+
+.report-mini {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #86efac;
+  flex: 1;
+}
+
+.report-footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.mini-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.mini-card .small {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.mini-card .big {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+}
+
+.hint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #cbd5e1;
+  opacity: 0.9;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(14px);
+  background: rgba(15,23,42,0.96);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 12px 16px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 20;
+  font-size: 13px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 980px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .right-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 14px;
+  }
+
+  .left-panel,
+  .right-panel {
+    padding: 18px;
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stats,
+  .grid,
+  .action-row,
+  .report-footer {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .date-badge {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="bg-blur">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+  </div>  <div class="wrap">
+    <section class="panel left-panel">
+      <div class="brand">
+        <div class="brand-title">
+          <div class="logo">✨</div>
+          <div>
+            <h1>Shine Photobox</h1>
+            <div class="sub">Sistem report harian yang lebih clean, premium, dan siap kirim.</div>
+          </div>
+        </div>
+        <div class="date-badge" id="liveDate">Memuat tanggal...</div>
+      </div><div class="stats">
+    <div class="stat">
+      <div class="label">Cash</div>
+      <div class="value" id="statCash">Rp 0</div>
+    </div>
+    <div class="stat">
+      <div class="label">QRIS</div>
+      <div class="value" id="statQris">Rp 0</div>
+    </div>
+    <div class="stat">
+      <div class="label">Total</div>
+      <div class="value" id="statTotal">Rp 0</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label for="nama">Petugas</label>
+      <select id="nama">
+        <option value="">Pilih Petugas</option>
+        <option value="Reny">Reny</option>
+        <option value="Gita">Gita</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="shift">Shift</label>
+      <select id="shift">
+        <option value="">Pilih Shift</option>
+        <option value="Siang">Siang</option>
+        <option value="Malam">Malam</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="cash">Pemasukan Cash</label>
+      <div class="input-wrap">
+        <span class="prefix">Rp</span>
+        <input class="money" type="number" id="cash" placeholder="Contoh: 150000" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="qris">Pemasukan QRIS</label>
+      <div class="input-wrap">
+        <span class="prefix">Rp</span>
+        <input class="money" type="number" id="qris" placeholder="Contoh: 275000" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="kertas">Kertas Terpakai</label>
+      <input type="number" id="kertas" placeholder="Masukkan jumlah kertas terpakai" />
+    </div>
+
+    <div class="field">
+      <label for="sisa">Sisa Kertas</label>
+      <input type="number" id="sisa" placeholder="Masukkan sisa kertas" />
+    </div>
+
+    <div class="field full">
+      <label for="catatan">Catatan Tambahan</label>
+      <input type="text" id="catatan" placeholder="Opsional, misalnya: printer aman, tinta cukup, ramai setelah magrib" />
+    </div>
+  </div>
+
+  <div class="action-row">
+    <button class="generate" onclick="generateReport()">Generate Report</button>
+    <button class="copy" onclick="copyText()">Copy Report</button>
+    <button class="wa" onclick="sendWA()">Kirim WhatsApp</button>
+  </div>
+
+  <div class="hint">
+    Tips: isi data lalu klik <b>Generate Report</b>. Total akan otomatis dihitung dan hasilnya langsung siap dicopy atau dikirim ke WhatsApp.
+  </div>
+
+  <div class="footer">© Shine Photobox System • Premium Report UI</div>
+</section>
+
+<aside class="panel right-panel">
+  <div class="preview-head">
+    <h2>Preview Report</h2>
+    <div class="pill">Siap Kirim</div>
+  </div>
+
+  <div class="report-box">
+    <div class="report-top">
+      <div>
+        <div class="report-title">Laporan Harian</div>
+        <div class="report-mini">Format otomatis untuk operasional Shine Photobox</div>
+      </div>
+      <div style="font-size: 24px;">📋</div>
+    </div>
+
+    <pre id="output">✨ SHINE PHOTOBOX - REPORT HARIAN
+
+Isi data di sebelah kiri lalu klik Generate Report. Hasil laporan akan muncul otomatis di sini.</pre>
+
+<div class="report-footer">
+      <div class="mini-card">
+        <div class="small">Estimasi Pendapatan</div>
+        <div class="big" id="totalMini">Rp 0</div>
+      </div>
+      <div class="mini-card">
+        <div class="small">Status Kertas</div>
+        <div class="big" id="paperMini">-</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  </div>  <div id="toast" class="toast"></div>  <script>
+    function rupiah(n) {
+      return 'Rp ' + Number(n || 0).toLocaleString('id-ID');
+    }
+
+    function getTodayLong() {
+      return new Date().toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    function updateLiveDate() {
+      const now = new Date();
+      const jam = now.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      document.getElementById('liveDate').innerHTML = `${getTodayLong()}<br><span style="opacity:.8">${jam} WIB</span>`;
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function updateStats() {
+      const cash = +document.getElementById('cash').value || 0;
+      const qris = +document.getElementById('qris').value || 0;
+      const total = cash + qris;
+      const kertas = document.getElementById('kertas').value || 0;
+      const sisa = document.getElementById('sisa').value || 0;
+
+      document.getElementById('statCash').textContent = rupiah(cash);
+      document.getElementById('statQris').textContent = rupiah(qris);
+      document.getElementById('statTotal').textContent = rupiah(total);
+      document.getElementById('totalMini').textContent = rupiah(total);
+      document.getElementById('paperMini').textContent = `${kertas} / sisa ${sisa}`;
+    }
+
+    function generateReport() {
+      const nama = document.getElementById('nama').value || '-';
+      const shift = document.getElementById('shift').value || '-';
+      const cash = +document.getElementById('cash').value || 0;
+      const qris = +document.getElementById('qris').value || 0;
+      const kertas = document.getElementById('kertas').value || 0;
+      const sisa = document.getElementById('sisa').value || 0;
+      const catatan = document.getElementById('catatan').value.trim();
+      const total = cash + qris;
+
+      const tanggal = new Date().toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+
+      const text = `✨ SHINE PHOTOBOX - REPORT HARIAN\n\nTanggal : ${tanggal}\nPetugas : ${nama}\nShift   : ${shift}\n\nCash    : ${rupiah(cash)}\nQRIS    : ${rupiah(qris)}\n\nKertas terpakai : ${kertas}\nSisa kertas     : ${sisa}\n\nTotal pendapatan : ${rupiah(total)}${catatan ? `\n\nCatatan : ${catatan}` : ''}\n\nTerima kasih 🙏`;
+
+      document.getElementById('output').textContent = text;
+      updateStats();
+      showToast('Report berhasil dibuat');
+    }
+
+    async function copyText() {
+      const text = document.getElementById('output').textContent;
+      if (!text.trim()) {
+        showToast('Belum ada report untuk dicopy');
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('Report berhasil dicopy');
+      } catch (e) {
+        const range = document.createRange();
+        range.selectNode(document.getElementById('output'));
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+        showToast('Report berhasil dicopy');
+      }
+    }
+
+    function sendWA() {
+      const text = document.getElementById('output').textContent.trim();
+      if (!text) {
+        showToast('Generate report dulu ya');
+        return;
+      }
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
+
+    ['cash', 'qris', 'kertas', 'sisa'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateStats);
+    });
+
+    updateLiveDate();
+    updateStats();
+    setInterval(updateLiveDate, 1000 * 30);
+  </script></body>
 </html>
