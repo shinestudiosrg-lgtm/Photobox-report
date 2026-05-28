@@ -717,10 +717,12 @@ pre {
             </div>
           </div>
 
-          <pre id="output">SHINE PHOTOBOX
-LAPORAN OPERASIONAL HARIAN
+          <pre id="output">╭──────────────────────╮
+      📸 SHINE PHOTOBOX
+   DAILY OPERATION REPORT
+╰──────────────────────╯
 
-Silakan isi form laporan, lalu klik Generate.</pre>
+Isi form laporan, lalu klik Generate.</pre>
 
           <div class="signature">
             <div class="signBox">
@@ -858,36 +860,60 @@ function generateReport() {
   const catatan = document.getElementById('catatan').value.trim() || '-';
 
   const report =
-`SHINE PHOTOBOX
-LAPORAN OPERASIONAL HARIAN
+`╭──────────────────────╮
+      📸 SHINE PHOTOBOX
+   DAILY OPERATION REPORT
+╰──────────────────────╯
 
-Nomor Laporan : ${reportNo}
-Tanggal       : ${tanggal}
-Petugas       : ${petugas}
-Shift         : ${shift}
+🧾 NOMOR LAPORAN
+${reportNo}
 
-RINGKASAN PENDAPATAN
-Cash          : ${rupiah(cash)}
-QRIS          : ${rupiah(qris)}
-Total         : ${rupiah(total)}
+📅 TANGGAL
+${tanggal}
 
-OPERASIONAL
+👤 PETUGAS
+${petugas}
+
+🕒 SHIFT
+${shift}
+
+━━━━━━━━━━━━━━━━━━━━━━
+💰 RINGKASAN PENDAPATAN
+━━━━━━━━━━━━━━━━━━━━━━
+
+Cash  : ${rupiah(cash)}
+QRIS  : ${rupiah(qris)}
+
+✅ TOTAL PENDAPATAN
+${rupiah(total)}
+
+━━━━━━━━━━━━━━━━━━━━━━
+📦 OPERASIONAL
+━━━━━━━━━━━━━━━━━━━━━━
+
 Kertas Terpakai : ${kertas}
 Sisa Kertas     : ${sisa}
 Status          : ${status}
 
-CATATAN
+━━━━━━━━━━━━━━━━━━━━━━
+📝 CATATAN
+━━━━━━━━━━━━━━━━━━━━━━
+
 ${catatan}
 
-Laporan ini dibuat sebagai dokumentasi operasional harian Shine Photobox.
+━━━━━━━━━━━━━━━━━━━━━━
 
-Terima kasih.`;
+Laporan ini dibuat sebagai dokumentasi
+operasional harian Shine Photobox.
+
+Terima kasih 🙏
+Shine Photobox`;
 
   document.getElementById('output').textContent = report;
   document.getElementById('previewReportNo').textContent = reportNo;
 
   updateStats();
-  showToast('Laporan resmi berhasil dibuat');
+  showToast('Laporan estetik berhasil dibuat');
 }
 
 async function copyText() {
