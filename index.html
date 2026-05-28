@@ -1,204 +1,217 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shine Photobox Report Premium</title>
-  <style>
-    :root {
-      --bg-1: #0f172a;
-      --bg-2: #1e293b;
-      --card: rgba(255, 255, 255, 0.14);
-      --card-border: rgba(255, 255, 255, 0.18);
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --dark: #0b1120;
-      --pink: #ff4ecd;
-      --blue: #3b82f6;
-      --yellow: #facc15;
-      --green: #22c55e;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      --radius: 24px;
-    }* {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shine Photobox - Corporate Daily Report</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #eef2f7;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --primary: #1d4ed8;
+  --primary2: #2563eb;
+  --dark: #0f172a;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+  --red: #dc2626;
+  --softBlue: #eff6ff;
+  --softGreen: #f0fdf4;
+  --shadow: 0 18px 45px rgba(15, 23, 42, .08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
-  font-family: Inter, "Segoe UI", sans-serif;
-  color: var(--text);
+  font-family: 'Inter', sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(255, 78, 205, 0.35), transparent 28%),
-    radial-gradient(circle at top right, rgba(59, 130, 246, 0.35), transparent 30%),
-    radial-gradient(circle at bottom center, rgba(250, 204, 21, 0.22), transparent 28%),
-    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    linear-gradient(135deg, rgba(37,99,235,.10), transparent 35%),
+    linear-gradient(315deg, rgba(15,23,42,.08), transparent 35%),
+    var(--bg);
+  color: var(--text);
+  padding: 22px;
+}
+
+.app {
+  width: min(1240px, 100%);
+  margin: auto;
+}
+
+.header {
+  background: var(--dark);
+  color: white;
+  border-radius: 28px;
   padding: 24px;
-  overflow-x: hidden;
-}
-
-.bg-blur {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+  position: relative;
   overflow: hidden;
-  z-index: 0;
 }
 
-.blob {
+.header::after {
+  content: "";
   position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.45;
-  animation: floatBlob 14s ease-in-out infinite;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(37,99,235,.45), transparent 65%);
+  right: -120px;
+  top: -160px;
 }
 
-.blob.one {
-  width: 220px;
-  height: 220px;
-  background: var(--pink);
-  top: 40px;
-  left: -40px;
-}
-
-.blob.two {
-  width: 260px;
-  height: 260px;
-  background: var(--blue);
-  top: 120px;
-  right: -70px;
-  animation-delay: 2s;
-}
-
-.blob.three {
-  width: 240px;
-  height: 240px;
-  background: var(--yellow);
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation-delay: 4s;
-}
-
-@keyframes floatBlob {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-18px) scale(1.05); }
-}
-
-.wrap {
+.brand {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  width: 62px;
+  height: 62px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  place-items: center;
+  font-size: 30px;
+  box-shadow: 0 14px 30px rgba(37,99,235,.35);
+}
+
+.brand h1 {
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.brand p {
+  margin-top: 6px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.headerInfo {
+  position: relative;
+  z-index: 1;
+  text-align: right;
+  display: grid;
+  gap: 8px;
+}
+
+.reportNo {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.liveDate {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr .95fr;
   gap: 22px;
   align-items: start;
 }
 
 .panel {
   background: var(--card);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-radius: 28px;
   box-shadow: var(--shadow);
 }
 
-.left-panel {
+.formPanel {
   padding: 24px;
 }
 
-.right-panel {
+.previewPanel {
   padding: 22px;
   position: sticky;
   top: 20px;
 }
 
-.brand {
+.panelHead {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 22px;
-}
-
-.brand-title {
-  display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-  background: linear-gradient(135deg, var(--pink), var(--blue), var(--yellow));
-  box-shadow: 0 12px 30px rgba(255, 78, 205, 0.25);
+.panelHead h2 {
+  font-size: 22px;
 }
 
-h1 {
-  font-size: 28px;
-  line-height: 1.1;
-  margin: 0;
-  letter-spacing: 0.2px;
-}
-
-.sub {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.date-badge {
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.12);
-  font-size: 13px;
-  color: #fff;
-  text-align: right;
-  min-width: 140px;
+.badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--softBlue);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .stat {
-  border-radius: 20px;
-  padding: 16px;
-  background: rgba(255,255,255,0.09);
-  border: 1px solid rgba(255,255,255,0.14);
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: #f8fafc;
 }
 
 .stat .label {
-  font-size: 12px;
   color: var(--muted);
-  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .5px;
 }
 
 .stat .value {
+  margin-top: 9px;
   font-size: 18px;
-  font-weight: 700;
-  color: #fff;
+  font-weight: 900;
 }
 
-.grid {
+.stat.total {
+  background: var(--softBlue);
+  border-color: #bfdbfe;
+}
+
+.stat.session {
+  background: var(--softGreen);
+  border-color: #bbf7d0;
+}
+
+.formGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 8px;
 }
 
@@ -208,65 +221,86 @@ h1 {
 
 label {
   font-size: 13px;
-  color: #e2e8f0;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-}
-
-.input-wrap {
-  position: relative;
-}
-
-.prefix {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  font-size: 13px;
-  pointer-events: none;
+  font-weight: 800;
+  color: #334155;
 }
 
 input,
 select {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(248, 250, 252, 0.98);
-  color: #0f172a;
-  border-radius: 16px;
-  padding: 14px 16px;
-  font-size: 14px;
+  border: 1px solid var(--line);
   outline: none;
-  transition: 0.25s ease;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
-}
-
-input.money {
-  padding-left: 44px;
+  padding: 15px 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 14px;
+  transition: .2s;
 }
 
 input:focus,
 select:focus {
-  transform: translateY(-1px);
-  border-color: rgba(59,130,246,0.45);
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.14);
+  border-color: var(--primary2);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
 }
 
-.action-row {
+.moneyWrap {
+  position: relative;
+}
+
+.moneyWrap span {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.moneyWrap input {
+  padding-left: 45px;
+}
+
+.petugasGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 11px;
+}
+
+.checkItem {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  cursor: pointer;
+  font-weight: 700;
+  color: #334155;
+}
+
+.checkItem input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 22px;
 }
 
 button {
   border: none;
   border-radius: 16px;
-  padding: 14px 16px;
-  font-size: 14px;
-  font-weight: 700;
+  padding: 15px 16px;
+  font-weight: 900;
   cursor: pointer;
-  transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+  transition: .2s;
+  font-size: 14px;
 }
 
 button:hover {
@@ -274,81 +308,93 @@ button:hover {
   filter: brightness(1.03);
 }
 
-button:active {
-  transform: translateY(0);
-}
-
 .generate {
-  background: linear-gradient(135deg, var(--pink), #ff7bd8);
+  background: linear-gradient(135deg, var(--primary), #38bdf8);
   color: white;
-  box-shadow: 0 14px 28px rgba(255, 78, 205, 0.26);
 }
 
 .copy {
-  background: linear-gradient(135deg, var(--blue), #7ab1ff);
+  background: #0f172a;
   color: white;
-  box-shadow: 0 14px 28px rgba(59, 130, 246, 0.26);
 }
 
 .wa {
-  background: linear-gradient(135deg, var(--yellow), #fde68a);
-  color: #111827;
-  box-shadow: 0 14px 28px rgba(250, 204, 21, 0.22);
-}
-
-.preview-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.preview-head h2 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.pill {
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(74, 222, 128, 0.14);
-  color: #86efac;
-  border: 1px solid rgba(74, 222, 128, 0.25);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.report-box {
-  border-radius: 22px;
-  padding: 18px;
-  background: linear-gradient(180deg, rgba(2,6,23,0.95), rgba(15,23,42,0.96));
-  border: 1px solid rgba(255,255,255,0.08);
-  min-height: 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-.report-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.report-title {
-  font-size: 18px;
-  font-weight: 800;
+  background: #22c55e;
   color: white;
 }
 
-.report-mini {
+.print {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid var(--line);
+}
+
+.reportPaper {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  background: white;
+}
+
+.reportHeader {
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.reportHeader h3 {
+  font-size: 20px;
+}
+
+.reportHeader p {
+  color: #cbd5e1;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+.reportStatus {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(34,197,94,.16);
+  color: #86efac;
+  font-weight: 900;
   font-size: 12px;
-  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.reportBody {
+  padding: 20px;
+}
+
+.companyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.infoBox {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+  background: #f8fafc;
+}
+
+.infoBox .small {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.infoBox .big {
+  margin-top: 6px;
+  font-weight: 900;
+  font-size: 16px;
 }
 
 pre {
@@ -356,68 +402,61 @@ pre {
   white-space: pre-wrap;
   word-break: break-word;
   font-family: "Consolas", "Courier New", monospace;
-  font-size: 13px;
-  line-height: 1.65;
-  color: #86efac;
-  flex: 1;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+  min-height: 315px;
 }
 
-.report-footer {
+.signature {
+  margin-top: 16px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
-.mini-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
+.signBox {
+  border: 1px solid var(--line);
+  border-radius: 16px;
   padding: 14px;
+  background: #ffffff;
+  min-height: 92px;
 }
 
-.mini-card .small {
-  font-size: 12px;
-  color: #94a3b8;
-  margin-bottom: 6px;
-}
-
-.mini-card .big {
-  font-size: 18px;
-  font-weight: 800;
-  color: white;
-}
-
-.hint {
-  margin-top: 12px;
+.signBox p {
   font-size: 12px;
   color: var(--muted);
-  line-height: 1.5;
+  font-weight: 800;
 }
 
-.footer {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 12px;
-  color: #cbd5e1;
-  opacity: 0.9;
+.signLine {
+  margin-top: 36px;
+  border-top: 1px solid #cbd5e1;
+  padding-top: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #334155;
 }
 
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%) translateY(14px);
-  background: rgba(15,23,42,0.96);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 12px 16px;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
+  bottom: 24px;
+  transform: translateX(-50%) translateY(18px);
   opacity: 0;
   pointer-events: none;
-  transition: 0.25s ease;
-  z-index: 20;
-  font-size: 13px;
+  transition: .25s;
+  padding: 13px 18px;
+  border-radius: 14px;
+  background: #0f172a;
+  color: white;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+  z-index: 999;
 }
 
 .toast.show {
@@ -425,281 +464,484 @@ pre {
   transform: translateX(-50%) translateY(0);
 }
 
-@media (max-width: 980px) {
-  .wrap {
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+
+  .header,
+  .formPanel,
+  .panelHead,
+  .toast {
+    display: none !important;
+  }
+
+  .app,
+  .main {
+    width: 100%;
+    display: block;
+  }
+
+  .previewPanel {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    position: static;
+  }
+
+  .reportPaper {
+    border-radius: 0;
+    border: none;
+  }
+}
+
+@media(max-width: 980px) {
+  .main {
     grid-template-columns: 1fr;
   }
 
-  .right-panel {
+  .previewPanel {
     position: static;
   }
 }
 
-@media (max-width: 640px) {
+@media(max-width: 680px) {
   body {
     padding: 14px;
   }
 
-  .left-panel,
-  .right-panel {
-    padding: 18px;
-  }
-
-  .brand {
+  .header {
     flex-direction: column;
     align-items: flex-start;
   }
 
+  .headerInfo {
+    text-align: left;
+  }
+
   .stats,
-  .grid,
-  .action-row,
-  .report-footer {
+  .formGrid,
+  .petugasGrid,
+  .actions,
+  .companyGrid,
+  .signature {
     grid-template-columns: 1fr;
   }
 
-  h1 {
-    font-size: 24px;
+  .brand h1 {
+    font-size: 23px;
   }
 
-  .date-badge {
-    width: 100%;
-    text-align: left;
+  .logo {
+    width: 54px;
+    height: 54px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+    <div class="brand">
+      <div class="logo">📸</div>
+      <div>
+        <h1>Shine Photobox</h1>
+        <p>Corporate Daily Operational Report System</p>
+      </div>
+    </div>
+
+    <div class="headerInfo">
+      <div class="reportNo" id="reportNumber">Report No: -</div>
+      <div class="liveDate" id="liveDate">Memuat tanggal...</div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section class="panel formPanel">
+
+      <div class="panelHead">
+        <h2>Form Laporan Harian</h2>
+        <div class="badge">OFFICIAL REPORT</div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="label">Cash</div>
+          <div class="value" id="statCash">Rp 0</div>
+        </div>
+
+        <div class="stat">
+          <div class="label">QRIS</div>
+          <div class="value" id="statQris">Rp 0</div>
+        </div>
+
+        <div class="stat total">
+          <div class="label">Total</div>
+          <div class="value" id="statTotal">Rp 0</div>
+        </div>
+
+        <div class="stat session">
+          <div class="label">Kertas</div>
+          <div class="value" id="statPaper">0</div>
+        </div>
+      </div>
+
+      <div class="formGrid">
+
+        <div class="field">
+          <label>Tanggal Report</label>
+          <input type="date" id="tanggalReport">
+        </div>
+
+        <div class="field">
+          <label>Shift</label>
+          <select id="shift">
+            <option value="">Pilih Shift</option>
+            <option value="Siang">Siang</option>
+            <option value="Malam">Malam</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Petugas Bertugas</label>
+          <div class="petugasGrid">
+            <label class="checkItem">
+              <input type="checkbox" value="Reny" class="petugasCheck"> Reny
+            </label>
+            <label class="checkItem">
+              <input type="checkbox" value="Gita" class="petugasCheck"> Gita
+            </label>
+            <label class="checkItem">
+              <input type="checkbox" value="Wahdah" class="petugasCheck"> Wahdah
+            </label>
+            <label class="checkItem">
+              <input type="checkbox" value="Ikoh" class="petugasCheck"> Ikoh
+            </label>
+            <label class="checkItem">
+              <input type="checkbox" value="Nazwa" class="petugasCheck"> Nazwa
+            </label>
+            <label class="checkItem">
+              <input type="checkbox" value="Lainnya" class="petugasCheck"> Lainnya
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Pemasukan Cash</label>
+          <div class="moneyWrap">
+            <span>Rp</span>
+            <input type="number" id="cash" placeholder="0">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Pemasukan QRIS</label>
+          <div class="moneyWrap">
+            <span>Rp</span>
+            <input type="number" id="qris" placeholder="0">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Kertas Terpakai</label>
+          <input type="number" id="kertas" placeholder="0">
+        </div>
+
+        <div class="field">
+          <label>Sisa Kertas</label>
+          <input type="number" id="sisa" placeholder="0">
+        </div>
+
+        <div class="field full">
+          <label>Status Operasional</label>
+          <select id="status">
+            <option value="Normal">Normal</option>
+            <option value="Ramai">Ramai</option>
+            <option value="Sepi">Sepi</option>
+            <option value="Kendala Teknis">Kendala Teknis</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Catatan Tambahan</label>
+          <input type="text" id="catatan" placeholder="Contoh: printer aman, tinta cukup, ramai setelah magrib">
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button class="generate" onclick="generateReport()">Generate</button>
+        <button class="copy" onclick="copyText()">Copy</button>
+        <button class="wa" onclick="sendWA()">WhatsApp</button>
+        <button class="print" onclick="printReport()">Print / PDF</button>
+      </div>
+
+    </section>
+
+    <aside class="panel previewPanel">
+
+      <div class="panelHead">
+        <h2>Preview Dokumen</h2>
+        <div class="badge">READY</div>
+      </div>
+
+      <div class="reportPaper" id="printArea">
+
+        <div class="reportHeader">
+          <div>
+            <h3>SHINE PHOTOBOX</h3>
+            <p>Daily Operational & Revenue Report</p>
+          </div>
+
+          <div class="reportStatus">OFFICIAL</div>
+        </div>
+
+        <div class="reportBody">
+
+          <div class="companyGrid">
+            <div class="infoBox">
+              <div class="small">Nomor Laporan</div>
+              <div class="big" id="previewReportNo">-</div>
+            </div>
+
+            <div class="infoBox">
+              <div class="small">Total Pendapatan</div>
+              <div class="big" id="previewTotal">Rp 0</div>
+            </div>
+
+            <div class="infoBox">
+              <div class="small">Kertas Terpakai</div>
+              <div class="big" id="previewPaper">0</div>
+            </div>
+
+            <div class="infoBox">
+              <div class="small">Status</div>
+              <div class="big" id="previewStatus">Normal</div>
+            </div>
+          </div>
+
+          <pre id="output">SHINE PHOTOBOX
+LAPORAN OPERASIONAL HARIAN
+
+Silakan isi form laporan, lalu klik Generate.</pre>
+
+          <div class="signature">
+            <div class="signBox">
+              <p>Dibuat oleh,</p>
+              <div class="signLine">Petugas Shift</div>
+            </div>
+
+            <div class="signBox">
+              <p>Diperiksa oleh,</p>
+              <div class="signLine">Supervisor / Owner</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+  </main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function rupiah(n) {
+  return 'Rp ' + Number(n || 0).toLocaleString('id-ID');
+}
+
+function setToday() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('tanggalReport').value = today;
+}
+
+function formatTanggal(dateValue) {
+  const date = dateValue ? new Date(dateValue) : new Date();
+
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+function getReportNumber() {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  const h = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+
+  return `SPB/${y}${m}${d}/${h}${min}`;
+}
+
+function updateLiveDate() {
+  const now = new Date();
+
+  const tanggal = now.toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  const jam = now.toLocaleTimeString('id-ID', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  document.getElementById('liveDate').innerHTML = `${tanggal}<br>${jam} WIB`;
+
+  const reportNo = getReportNumber();
+  document.getElementById('reportNumber').textContent = `Report No: ${reportNo}`;
+  document.getElementById('previewReportNo').textContent = reportNo;
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200);
+}
+
+function getPetugas() {
+  const checked = [...document.querySelectorAll('.petugasCheck:checked')];
+
+  if (checked.length === 0) {
+    return '-';
+  }
+
+  return checked.map(item => item.value).join(', ');
+}
+
+function updateStats() {
+  const cash = +document.getElementById('cash').value || 0;
+  const qris = +document.getElementById('qris').value || 0;
+  const kertas = +document.getElementById('kertas').value || 0;
+  const sisa = +document.getElementById('sisa').value || 0;
+  const status = document.getElementById('status').value || 'Normal';
+
+  const total = cash + qris;
+
+  document.getElementById('statCash').textContent = rupiah(cash);
+  document.getElementById('statQris').textContent = rupiah(qris);
+  document.getElementById('statTotal').textContent = rupiah(total);
+  document.getElementById('statPaper').textContent = kertas;
+
+  document.getElementById('previewTotal').textContent = rupiah(total);
+  document.getElementById('previewPaper').textContent = `${kertas} Terpakai / ${sisa} Sisa`;
+  document.getElementById('previewStatus').textContent = status;
+}
+
+function generateReport() {
+  const reportNo = getReportNumber();
+  const tanggal = formatTanggal(document.getElementById('tanggalReport').value);
+  const petugas = getPetugas();
+  const shift = document.getElementById('shift').value || '-';
+
+  const cash = +document.getElementById('cash').value || 0;
+  const qris = +document.getElementById('qris').value || 0;
+  const total = cash + qris;
+
+  const kertas = +document.getElementById('kertas').value || 0;
+  const sisa = +document.getElementById('sisa').value || 0;
+
+  const status = document.getElementById('status').value || 'Normal';
+  const catatan = document.getElementById('catatan').value.trim() || '-';
+
+  const report =
+`SHINE PHOTOBOX
+LAPORAN OPERASIONAL HARIAN
+
+Nomor Laporan : ${reportNo}
+Tanggal       : ${tanggal}
+Petugas       : ${petugas}
+Shift         : ${shift}
+
+RINGKASAN PENDAPATAN
+Cash          : ${rupiah(cash)}
+QRIS          : ${rupiah(qris)}
+Total         : ${rupiah(total)}
+
+OPERASIONAL
+Kertas Terpakai : ${kertas}
+Sisa Kertas     : ${sisa}
+Status          : ${status}
+
+CATATAN
+${catatan}
+
+Laporan ini dibuat sebagai dokumentasi operasional harian Shine Photobox.
+
+Terima kasih.`;
+
+  document.getElementById('output').textContent = report;
+
+  document.getElementById('previewReportNo').textContent = reportNo;
+  updateStats();
+
+  showToast('Laporan resmi berhasil dibuat');
+}
+
+async function copyText() {
+  const text = document.getElementById('output').textContent;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Laporan berhasil dicopy');
+  } catch (err) {
+    const temp = document.createElement('textarea');
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand('copy');
+    document.body.removeChild(temp);
+
+    showToast('Laporan berhasil dicopy');
   }
 }
 
-  </style>
-</head>
-<body>
-  <div class="bg-blur">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
-  </div>  <div class="wrap">
-    <section class="panel left-panel">
-      <div class="brand">
-        <div class="brand-title">
-          <div class="logo">✨</div>
-          <div>
-            <h1>Shine Photobox</h1>
-            <div class="sub">Sistem report harian yang lebih clean, premium, dan siap kirim.</div>
-          </div>
-        </div>
-        <div class="date-badge" id="liveDate">Memuat tanggal...</div>
-      </div><div class="stats">
-    <div class="stat">
-      <div class="label">Cash</div>
-      <div class="value" id="statCash">Rp 0</div>
-    </div>
-    <div class="stat">
-      <div class="label">QRIS</div>
-      <div class="value" id="statQris">Rp 0</div>
-    </div>
-    <div class="stat">
-      <div class="label">Total</div>
-      <div class="value" id="statTotal">Rp 0</div>
-    </div>
-  </div>
+function sendWA() {
+  generateReport();
 
-  <div class="grid">
-    <div class="field">
-      <label for="nama">Petugas</label>
-      <select id="nama">
-        <option value="">Pilih Petugas</option>
-        <option value="Reny">Reny</option>
-        <option value="Gita">Gita</option>
-      </select>
-    </div>
+  const text = document.getElementById('output').textContent;
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
 
-    <div class="field">
-      <label for="shift">Shift</label>
-      <select id="shift">
-        <option value="">Pilih Shift</option>
-        <option value="Siang">Siang</option>
-        <option value="Malam">Malam</option>
-      </select>
-    </div>
+  window.open(url, '_blank');
+}
 
-    <div class="field">
-      <label for="cash">Pemasukan Cash</label>
-      <div class="input-wrap">
-        <span class="prefix">Rp</span>
-        <input class="money" type="number" id="cash" placeholder="Contoh: 150000" />
-      </div>
-    </div>
+function printReport() {
+  generateReport();
+  window.print();
+}
 
-    <div class="field">
-      <label for="qris">Pemasukan QRIS</label>
-      <div class="input-wrap">
-        <span class="prefix">Rp</span>
-        <input class="money" type="number" id="qris" placeholder="Contoh: 275000" />
-      </div>
-    </div>
+['cash', 'qris', 'kertas', 'sisa', 'status'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateStats);
+  document.getElementById(id).addEventListener('change', updateStats);
+});
 
-    <div class="field">
-      <label for="kertas">Kertas Terpakai</label>
-      <input type="number" id="kertas" placeholder="Masukkan jumlah kertas terpakai" />
-    </div>
+setToday();
+updateLiveDate();
+updateStats();
 
-    <div class="field">
-      <label for="sisa">Sisa Kertas</label>
-      <input type="number" id="sisa" placeholder="Masukkan sisa kertas" />
-    </div>
+setInterval(updateLiveDate, 30000);
+</script>
 
-    <div class="field full">
-      <label for="catatan">Catatan Tambahan</label>
-      <input type="text" id="catatan" placeholder="Opsional, misalnya: printer aman, tinta cukup, ramai setelah magrib" />
-    </div>
-  </div>
-
-  <div class="action-row">
-    <button class="generate" onclick="generateReport()">Generate Report</button>
-    <button class="copy" onclick="copyText()">Copy Report</button>
-    <button class="wa" onclick="sendWA()">Kirim WhatsApp</button>
-  </div>
-
-  <div class="hint">
-    Tips: isi data lalu klik <b>Generate Report</b>. Total akan otomatis dihitung dan hasilnya langsung siap dicopy atau dikirim ke WhatsApp.
-  </div>
-
-  <div class="footer">© Shine Photobox System • Premium Report UI</div>
-</section>
-
-<aside class="panel right-panel">
-  <div class="preview-head">
-    <h2>Preview Report</h2>
-    <div class="pill">Siap Kirim</div>
-  </div>
-
-  <div class="report-box">
-    <div class="report-top">
-      <div>
-        <div class="report-title">Laporan Harian</div>
-        <div class="report-mini">Format otomatis untuk operasional Shine Photobox</div>
-      </div>
-      <div style="font-size: 24px;">📋</div>
-    </div>
-
-    <pre id="output">✨ SHINE PHOTOBOX - REPORT HARIAN
-
-Isi data di sebelah kiri lalu klik Generate Report. Hasil laporan akan muncul otomatis di sini.</pre>
-
-<div class="report-footer">
-      <div class="mini-card">
-        <div class="small">Estimasi Pendapatan</div>
-        <div class="big" id="totalMini">Rp 0</div>
-      </div>
-      <div class="mini-card">
-        <div class="small">Status Kertas</div>
-        <div class="big" id="paperMini">-</div>
-      </div>
-    </div>
-  </div>
-</aside>
-
-  </div>  <div id="toast" class="toast"></div>  <script>
-    function rupiah(n) {
-      return 'Rp ' + Number(n || 0).toLocaleString('id-ID');
-    }
-
-    function getTodayLong() {
-      return new Date().toLocaleDateString('id-ID', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      });
-    }
-
-    function updateLiveDate() {
-      const now = new Date();
-      const jam = now.toLocaleTimeString('id-ID', {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-      document.getElementById('liveDate').innerHTML = `${getTodayLong()}<br><span style="opacity:.8">${jam} WIB</span>`;
-    }
-
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-    }
-
-    function updateStats() {
-      const cash = +document.getElementById('cash').value || 0;
-      const qris = +document.getElementById('qris').value || 0;
-      const total = cash + qris;
-      const kertas = document.getElementById('kertas').value || 0;
-      const sisa = document.getElementById('sisa').value || 0;
-
-      document.getElementById('statCash').textContent = rupiah(cash);
-      document.getElementById('statQris').textContent = rupiah(qris);
-      document.getElementById('statTotal').textContent = rupiah(total);
-      document.getElementById('totalMini').textContent = rupiah(total);
-      document.getElementById('paperMini').textContent = `${kertas} / sisa ${sisa}`;
-    }
-
-    function generateReport() {
-      const nama = document.getElementById('nama').value || '-';
-      const shift = document.getElementById('shift').value || '-';
-      const cash = +document.getElementById('cash').value || 0;
-      const qris = +document.getElementById('qris').value || 0;
-      const kertas = document.getElementById('kertas').value || 0;
-      const sisa = document.getElementById('sisa').value || 0;
-      const catatan = document.getElementById('catatan').value.trim();
-      const total = cash + qris;
-
-      const tanggal = new Date().toLocaleDateString('id-ID', {
-        day: 'numeric', month: 'long', year: 'numeric'
-      });
-
-      const text = `✨ SHINE PHOTOBOX - REPORT HARIAN\n\nTanggal : ${tanggal}\nPetugas : ${nama}\nShift   : ${shift}\n\nCash    : ${rupiah(cash)}\nQRIS    : ${rupiah(qris)}\n\nKertas terpakai : ${kertas}\nSisa kertas     : ${sisa}\n\nTotal pendapatan : ${rupiah(total)}${catatan ? `\n\nCatatan : ${catatan}` : ''}\n\nTerima kasih 🙏`;
-
-      document.getElementById('output').textContent = text;
-      updateStats();
-      showToast('Report berhasil dibuat');
-    }
-
-    async function copyText() {
-      const text = document.getElementById('output').textContent;
-      if (!text.trim()) {
-        showToast('Belum ada report untuk dicopy');
-        return;
-      }
-
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast('Report berhasil dicopy');
-      } catch (e) {
-        const range = document.createRange();
-        range.selectNode(document.getElementById('output'));
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        document.execCommand('copy');
-        selection.removeAllRanges();
-        showToast('Report berhasil dicopy');
-      }
-    }
-
-    function sendWA() {
-      const text = document.getElementById('output').textContent.trim();
-      if (!text) {
-        showToast('Generate report dulu ya');
-        return;
-      }
-      const encoded = encodeURIComponent(text);
-      window.open(`https://wa.me/?text=${encoded}`, '_blank');
-    }
-
-    ['cash', 'qris', 'kertas', 'sisa'].forEach(id => {
-      document.getElementById(id).addEventListener('input', updateStats);
-    });
-
-    updateLiveDate();
-    updateStats();
-    setInterval(updateLiveDate, 1000 * 30);
-  </script></body>
+</body>
 </html>
