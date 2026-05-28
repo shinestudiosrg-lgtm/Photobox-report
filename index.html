@@ -19,8 +19,6 @@
   --primary2: #2563eb;
   --dark: #0f172a;
   --green: #16a34a;
-  --yellow: #ca8a04;
-  --red: #dc2626;
   --softBlue: #eff6ff;
   --softGreen: #f0fdf4;
   --shadow: 0 18px 45px rgba(15, 23, 42, .08);
@@ -609,24 +607,18 @@ pre {
 
         <div class="field full">
           <label>Petugas Bertugas</label>
+
           <div class="petugasGrid">
             <label class="checkItem">
               <input type="checkbox" value="Reny" class="petugasCheck"> Reny
             </label>
+
             <label class="checkItem">
               <input type="checkbox" value="Gita" class="petugasCheck"> Gita
             </label>
+
             <label class="checkItem">
-              <input type="checkbox" value="Wahdah" class="petugasCheck"> Wahdah
-            </label>
-            <label class="checkItem">
-              <input type="checkbox" value="Ikoh" class="petugasCheck"> Ikoh
-            </label>
-            <label class="checkItem">
-              <input type="checkbox" value="Nazwa" class="petugasCheck"> Nazwa
-            </label>
-            <label class="checkItem">
-              <input type="checkbox" value="Lainnya" class="petugasCheck"> Lainnya
+              <input type="checkbox" value="Jessica" class="petugasCheck"> Jessica
             </label>
           </div>
         </div>
@@ -892,14 +884,15 @@ Laporan ini dibuat sebagai dokumentasi operasional harian Shine Photobox.
 Terima kasih.`;
 
   document.getElementById('output').textContent = report;
-
   document.getElementById('previewReportNo').textContent = reportNo;
-  updateStats();
 
+  updateStats();
   showToast('Laporan resmi berhasil dibuat');
 }
 
 async function copyText() {
+  generateReport();
+
   const text = document.getElementById('output').textContent;
 
   try {
